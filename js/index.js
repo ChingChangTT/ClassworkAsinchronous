@@ -1,19 +1,24 @@
-import { CardComponent} from "../components/components.js";
 
-// document.addEventListener("DOMContentLoaded", () => {}
-
-import { getData } from "../store/fatchApi.js";
-
-let comments = await getData("comments");
-let albums = await getData("albums");
-console.log("comments", comments);
-console.log("albums", albums);
-const renderArea = document.getElementById("renderArea");
-const BASE_URL = "http://127.0.0.1:5500/data/products.json";
-fetch(BASE_URL)
-  .then((a) => a.json())
-  .then((data) => {
-    let products = data.result.products;
-    console.log(products);
-    products.map((product) => (renderArea.innerHTML += CardComponent(product)));
+import { CardComponent } from "../components/components.js";
+import { getdata } from "../store/fatchApi.js";
+document.addEventListener("DOMContentLoaded", () => {
+  const renderArea = document.getElementById("renderArea");
+  // products.forEach((product) => {
+  //   const productCardHTML = CardComponent(product);
+  //   renderArea.innerHTML += productCardHTML;
+  // });
+  const BASE_URL="http://127.0.0.1:5500/data/products.json";
+  fetch(BASE_URL).then((res)=>res.json()).then((data)=>{
+    let products=data.products;
+    console.log("product ",products)
+    products.map((product)=>renderArea.innerHTML+=CardComponent(product));
   });
+  console.log("This is print");
+  // fetch (BASE_URL
+    
+  // ).then((res)=>res.json).then((data)=>{console.log(data);})
+});
+let comment =await getdata("comments");
+console.log("Comment:",comment);
+let album =await getdata("albums");
+console.log("Album:",album);
